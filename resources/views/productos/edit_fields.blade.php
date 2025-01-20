@@ -34,7 +34,7 @@
     <!-- Precio Final con IVA Field -->
     <div class="form-group col-sm-12 col-md-6">
         {!! Form::label('precio_final', 'Precio Final con IVA:', ['class' => 'bold']) !!}
-        {!! Form::text('precio_final', $producto->aplica_iva === 1 ? $producto->precio_venta * 1.16 : $precio->venta, ['class' => 'form-control round', 'id' => 'precio_final', 'readonly']) !!}
+        {!! Form::text('precio_final', $producto->aplica_iva === 1 ? $producto->precio_venta * 1.16 : $producto->precio_venta, ['class' => 'form-control round', 'id' => 'precio_final', 'readonly']) !!}
     </div>
     <!-- Aplica IVA Field -->
     <div class="form-group col-sm-12 col-md-6">
@@ -73,8 +73,7 @@
     <a href="{{ route('almacen') }}" class="btn btn-danger round">Cancelar</a>
 </div>
 
-<script src="{{asset('js/sweetalert2.js')}}"></script>
-
+ 
  
 <script>
     document.addEventListener('DOMContentLoaded', function () {

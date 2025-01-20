@@ -21,14 +21,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            if(Auth::user()->hasRole('superAdmin')){
+            if (Auth::user()->hasRole('superAdmin')) {
                 $users = User::with('roles')
-                ->whereHas('roles', function($query) {
-                    $query->where('name', '!=', 'Cliente');
-                })
-                ->get();
-            
-            }else{
+                    ->whereHas('roles', function ($query) {
+                        $query->where('name', '!=', 'Cliente');
+                    })
+                    ->get();
+
+            } else {
                 $users = User::with('roles')->where('id', Auth::user()->id)->get(); // Use `with` to eager load roles
             }
 
@@ -46,22 +46,22 @@ class UserController extends Controller
                     $viewUrl = route('usuarios.edit', $row->id);
                     $deleteUrl = route('usuarios.destroy', $row->id);
                     $pdfUrl = route('usuarios.pdf', $row->id);
-                    
-                    $buttons = '<a href="' . $viewUrl . '" class="btn btn-info btn-sm">Ver</a>
+
+                    $buttons = '<a href="' . $viewUrl . '" class="btn btn-warning btn-sm">Editar</a>
                                 ';
-                    
+
                     // Solo agregar el botón de eliminar si el usuario tiene el rol de superAdmin
-                    if (Auth::user()->hasRole('superAdminn')) {
+                    if (Auth::user()->hasRole('superAdmin')) {
                         $buttons .= '<form action="' . $deleteUrl . '" method="POST" style="display:inline;" class="btn-delete">
                                         ' . csrf_field() . '
                                         ' . method_field('DELETE') . '
                                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                      </form>';
                     }
-                
+
                     return $buttons;
                 })
-                
+
                 ->rawColumns(['role', 'actions'])
                 ->make(true);
         } else {
@@ -72,14 +72,14 @@ class UserController extends Controller
     public function clientes(Request $request)
     {
         if ($request->ajax()) {
-            
-                $users = User::with('roles')
-                ->whereHas('roles', function($query) {
+
+            $users = User::with('roles')
+                ->whereHas('roles', function ($query) {
                     $query->where('name', '=', 'Cliente');
                 })
                 ->get();
-            
-            
+
+
 
             return DataTables::of($users)
                 ->addColumn('role', function ($row) {
@@ -95,22 +95,22 @@ class UserController extends Controller
                     $viewUrl = route('usuarios.edit', $row->id);
                     $deleteUrl = route('usuarios.destroy', $row->id);
                     $pdfUrl = route('usuarios.pdf', $row->id);
-                    
+
                     $buttons = '<a href="' . $viewUrl . '" class="btn btn-info btn-sm">Ver</a>
                                ';
-                    
+
                     // Solo agregar el botón de eliminar si el usuario tiene el rol de superAdmin
-                    if (Auth::user()->hasRole('superAdminn')) {
+                    if (Auth::user()->hasRole('superAdmin')) {
                         $buttons .= '<form action="' . $deleteUrl . '" method="POST" style="display:inline;" class="btn-delete">
                                         ' . csrf_field() . '
                                         ' . method_field('DELETE') . '
                                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                      </form>';
                     }
-                
+
                     return $buttons;
                 })
-                
+
                 ->rawColumns(['role', 'actions'])
                 ->make(true);
         } else {
@@ -166,12 +166,12 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            
+
             'dni' => 'required|string|max:20',
             'sector' => 'nullable|string|max:100',
             'calle' => 'nullable|string|max:100',
             'casa' => 'nullable|string|max:100',
-             
+
             'status' => 'required|string|in:Activo,Inactivo',
         ]);
 
@@ -179,7 +179,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' =>  Hash::make($request->password ?? '12345678'), // Encriptar la contraseña
+            'password' => Hash::make($request->password ?? '12345678'), // Encriptar la contraseña
             'dni' => $request->dni,
             'sector' => $request->sector,
             'calle' => $request->calle,
@@ -188,13 +188,13 @@ class UserController extends Controller
         ]);
 
         // Asignar el rol al usuario
-        if($request->role){
+        if ($request->role) {
             $user->assignRole($request->role);
 
             Alert::success('¡Exito!', 'Registro hecho correctamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
 
             return redirect()->route('usuarios.index');
-        }else{
+        } else {
             $user->assignRole('Cliente');
 
             Alert::success('¡Exito!', 'Registro hecho correctamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
@@ -220,13 +220,19 @@ class UserController extends Controller
     public function edit($id)
     {
         // Encontrar el usuario por ID
-        $user = User::with('roles')->where('id',$id)->first();
-        
+        $user = User::with('roles')->where('id', $id)->first();
+
         // Obtener todos los roles disponibles
         $roles = Role::where('name', '!=', 'cliente')->get();
 
+        if (Auth::user()->hasRole('cliente')) {
+            $cliente = true;
+        } else {
+            $cliente = false;
+        }
+
         // Retornar la vista con los datos del usuario y los roles
-        return view('usuarios.edit', compact('user', 'roles'));
+        return view('usuarios.edit', compact('user', 'roles', 'cliente'));
     }
 
 
@@ -284,17 +290,28 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $user = User::find($id);
+            $user->delete();
+            Alert::success('¡Exito!', 'Registro actualizado correctamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+
+            return redirect()->route('usuarios.index');
+        } catch (\Throwable $th) {
+            Alert::success('¡Exito!', 'Registro actualizado correctamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+
+            return redirect()->back();
+        }
     }
 
     public function export(Request $request)
-{
-    $filters = $request->only(['fecha_inicio', 'fecha_fin']);
+    {
+        $filters = $request->only(['fecha_inicio', 'fecha_fin']);
 
-    return Excel::download(new UserExport($filters), 'usuarios.xlsx');
-}
-public function reporte(Request $request)
-{
-   return view('usuarios.reporte')
-;}
+        return Excel::download(new UserExport($filters), 'usuarios.xlsx');
+    }
+    public function reporte(Request $request)
+    {
+        return view('usuarios.reporte')
+        ;
+    }
 }

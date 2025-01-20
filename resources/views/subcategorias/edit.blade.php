@@ -13,13 +13,13 @@
                             </div>
 
                             <div class="col-md-6 col-6">
-                                <h3 class="p-2 bold">Editar Categoria</h3>
+                                <h3 class="p-2 bold">Editar Subcategoría</h3>
                             </div>
 
                         </div>
                         <div class="card-body">
-                            {!! Form::model($categoria, ['route' => ['subcategorias.update', $categoria->id], 'method' => 'PUT', 'class' => 'btn-create', 'enctype' => 'multipart/form-data']) !!}
-                            @include('categorias.edit_fields')
+                            {!! Form::model($subcategoria, ['route' => ['subcategorias.update', $subcategoria->id], 'method' => 'PUT', 'class' => 'btn-create', 'enctype' => 'multipart/form-data']) !!}
+                            @include('subcategorias.edit_fields')
                             {!! Form::close() !!}
 
                         </div>

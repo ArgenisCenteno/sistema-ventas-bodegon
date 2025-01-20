@@ -117,7 +117,7 @@
                 <i class="material-icons">currency_exchange</i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text">Total Divisa</span>
+                <span class="info-box-text">Total Dólares</span>
                 <span class="info-box-number">{{ number_format($divisa, 2) }}</span>
             </div>
         </div>

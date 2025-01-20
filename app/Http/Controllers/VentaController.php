@@ -227,7 +227,7 @@ class VentaController extends Controller
             [
                 "id" => 2,
                 "metodo" => "Punto de Venta",
-                "monto" => $request->input('Punto de Venta')
+                "monto" => $request->input('Punto-de-Venta')
             ],
             [
                 "id" => 3,
@@ -237,7 +237,7 @@ class VentaController extends Controller
             [
                 "id" => 4,
                 "metodo" => "Pago Movil",
-                "monto" => $request->input('Pago Movil')
+                "monto" => $request->input('Pago-Movil')
             ],
             [
                 "id" => 5,
@@ -252,7 +252,7 @@ class VentaController extends Controller
         ];
 
 
-
+       
         // Filtrar los métodos de pago que sean distintos de null y mayores a cero
         $filteredPayments = array_filter($paymentMethods, function ($value) {
             return $value !== null && $value > 0;

@@ -26,3 +26,6 @@
 </div>
 </main> <!--end::App Main--> <!--begin::Footer-->
 @endsection
+@section('js')
+@include('layout.script')
+<script src="{{ asset('js/adminlte.js') }}"></script>

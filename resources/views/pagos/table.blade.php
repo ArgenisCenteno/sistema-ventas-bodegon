@@ -22,7 +22,6 @@
 @section('js')
 @include('layout.script')
 <script src="{{ asset('js/adminlte.js') }}"></script>
-<script src="{{asset('js/sweetalert2.js')}}"></script>
 
 <script type="text/javascript">
    $(document).ready(function() {

@@ -34,6 +34,14 @@ class ProductoController extends Controller
                         return $producto->fecha_vencimiento;
                     }
                 })
+                ->addColumn('aplica_iva', function ($producto) {
+                   
+                    if ($producto->aplica_iva == 1) {
+                        return '<span class="badge bg-success">Sí</span>';
+                    } else {
+                        return '<span class="badge bg-danger">No</span>';
+                    }
+                })
                 ->editColumn('created_at', function ($producto) {
                     return $producto->created_at->format('Y-m-d H:i:s');
                 })
@@ -50,7 +58,7 @@ class ProductoController extends Controller
                     return $producto->disponible ? '<span class="badge bg-success">SÍ</span>' : '<span class="badge bg-danger">NO</span>';
                 })
                 ->addColumn('actions', 'productos.actions')
-                ->rawColumns(['status', 'actions', 'disponible'])
+                ->rawColumns(['status', 'actions', 'disponible', 'aplica_iva'])
                 ->make(true);
         } else {
             return view('productos.index');

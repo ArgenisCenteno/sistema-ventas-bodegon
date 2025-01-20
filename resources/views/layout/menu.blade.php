@@ -44,12 +44,12 @@
                                     <p>Productos</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{route('proveedores.index')}}" class="nav-link">
+                            {{-- <li class="nav-item">
+                              <a href="{{route('proveedores.index')}}" class="nav-link">
                                     <i class="nav-icon fas fa-truck"></i>
                                     <p>Proveedores</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a href="{{route('usuarios.clientes')}}" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
@@ -83,7 +83,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item">
+                  {{--  <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-shopping-bag"></i>
                             <p>
@@ -105,7 +105,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>--}}
 
                     <li class="nav-item">
                         <a href="#" class="nav-link">

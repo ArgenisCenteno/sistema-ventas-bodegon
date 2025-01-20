@@ -3,11 +3,10 @@
     <div class='btn-group'>
         <a href="{{ route('subcategorias.edit', [$id]) }}" class='btn btn-info' data-bs-toggle="tooltip"
             data-bs-placement="top" title="Editar"><span class="material-icons">edit</span></a>
-            @if(Auth::user()->hasRole('superAdmin'))
+        
         {!! Form::button('<span class="material-icons">delete</span>', ['type' => 'submit', 'class' =>
         'btn btn-danger', 'data-bs-toggle' => 'tooltip', 'data-bs-placement' => 'top', 'title' => 'Eliminar']) !!}
-  @endif
-</div>
+    </div>
     {!! Form::close() !!}
 </td>
 <!-- SweetAlert CDN -->

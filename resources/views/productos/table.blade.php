@@ -42,9 +42,7 @@
                  { data: 'precio_venta', name: 'precio_venta' },
                  { data: 'precio_compra', name: 'precio_compra' },
                  { data: 'ganancia', name: 'ganancia' },
-                { data: 'aplica_iva', name: 'aplica_iva', render: function(data) {
-                    return data ? 'Sí' : 'No'; // Muestra "Sí" o "No" en vez de 1 o 0
-                }},
+                 { data: 'aplica_iva', name: 'aplica_iva' },
                 
                 { data: 'cantidad', name: 'cantidad' },
                 { data: 'subCategoria', name: 'subCategoria' }, 

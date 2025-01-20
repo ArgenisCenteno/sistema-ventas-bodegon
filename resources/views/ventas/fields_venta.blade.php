@@ -54,12 +54,12 @@
                 <input type="number" step="any" value="0" class="form-control" placeholder="Efectivo" name="Efectivo">
                 
                 <label for="" class="label"> <strong>Punto</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" placeholder="Punto" name="Punto de Venta">
+                <input type="number" step="any" value="0" class="form-control" placeholder="Punto" name="Punto-de-Venta">
                 
                 <label for="" class="label"> <strong>Transferencia</strong> </label>
                 <input type="number" step="any" value="0" class="form-control" placeholder="Transferencia" name="Transferencia">
                 <label for="" class="label"> <strong>Pago móvil</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" placeholder="Pago móvil" name="Pago Movil">
+                <input type="number" step="any" value="0" class="form-control" placeholder="Pago móvil" name="Pago-Movil">
                 <label for="" class="label"> <strong>Biopago</strong> </label>
                 <input type="number" step="any" value="0" class="form-control" placeholder="Biopago" name="Biopago">
                 <label for="" class="label"> <strong>Divisa</strong> </label>

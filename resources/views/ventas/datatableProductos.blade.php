@@ -260,9 +260,9 @@
     function pagado() {
         // Obtener los valores de los métodos de pago
         var efectivo = parseFloat(document.querySelector('input[name="Efectivo"]').value) || 0;
-        var punto = parseFloat(document.querySelector('input[name="Punto de Venta"]').value) || 0;
+        var punto = parseFloat(document.querySelector('input[name="Punto-de-Venta"]').value) || 0;
         var transferencia = parseFloat(document.querySelector('input[name="Transferencia"]').value) || 0;
-        var pagoMovil = parseFloat(document.querySelector('input[name="Pago Movil"]').value) || 0;
+        var pagoMovil = parseFloat(document.querySelector('input[name="Pago-Movil"]').value) || 0;
         var biopago = parseFloat(document.querySelector('input[name="Biopago"]').value) || 0;
         var divisa = parseFloat(document.querySelector('input[name="Divisa"]').value) || 0;
         var totalBS = parseFloat(document.getElementById("totalBolivares").value);

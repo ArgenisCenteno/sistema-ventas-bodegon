@@ -19,13 +19,7 @@ class SubCategoriaController extends Controller
         if ($request->ajax()) {
             $subcategorias = SubCategoria::with('categoria')->get();
             return DataTables::of($subcategorias)
-                ->addColumn('actions', function($row) {
-                    return '<a href="'.route('subcategorias.edit', [$row->id]).'" class="btn btn-info"><span class="material-icons">edit</span></a>
-                            <form action="'.route('subcategorias.destroy', [$row->id]).'" method="POST" style="display:inline;">
-                            '.csrf_field().method_field('DELETE').'
-                            <button type="submit" class="btn btn-danger"><span class="material-icons">delete</span></button>
-                            </form>';
-                })
+            ->addColumn('actions', 'subcategorias.actions')
                 ->editColumn('status', function($row) {
                     return $row->status ? '<span class="badge badge-success">Activo</span>' : '<span class="badge badge-danger">Inactivo</span>';
                 })
@@ -93,7 +87,12 @@ class SubCategoriaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $subcategoria = SubCategoria::find($id);
+        $categorias = Categoria::pluck('nombre', 'id');
+        
+        if($subcategoria){
+            return view('subcategorias.edit', compact('subcategoria', 'categorias'));
+        }
     }
 
     /**
@@ -101,7 +100,28 @@ class SubCategoriaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $actualizar = SubCategoria::where('id', $id)->first();
+       
+
+        if(!$actualizar){
+            Alert::error('¡Error!', 'No existe esta subcategoria')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+            return redirect(route('categorias.index'));
+        }
+
+        $actualizar->update([
+            'nombre' => $request->nombre,
+            'categoria_id' => $request->categoria_id,
+            'status' => $request->status
+        ]);
+        if ($actualizar) {
+            // Categoría creada correctamente
+            Alert::success('¡Éxito!', 'Registro actualizado correctamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+        } else {
+            // Error al intentar crear la categoría
+            Alert::error('¡Error!', 'Error al intentar actualizar la categoría')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+        }
+    
+        return redirect(route('subcategorias.index'));
     }
 
     /**
@@ -109,6 +129,21 @@ class SubCategoriaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $actualizar = SubCategoria::where('id', $id)->first();
+        if(!$actualizar){
+            Alert::error('¡Error!', 'No existe esta subcategoria')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+            return redirect(route('subcategorias.index'));
+        }
+
+        try {
+            $actualizar->delete();
+        Alert::success('¡Exito!', 'Registro eliminado exitosamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+        return redirect(route('subcategorias.index'));
+        } catch (\Throwable $th) {
+            Alert::error('¡Error!', 'No se puede eliminar, hay productos con esta subcategoría')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+
+            return redirect(route('subcategorias.index'));
+
+        }
     }
 }

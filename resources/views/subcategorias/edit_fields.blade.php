@@ -2,14 +2,19 @@
     <!-- Name Field -->
     <div class="form-group col-sm-12 col-md-6">
         {!! Form::label('nombre', 'Nombre:', ['class' => 'bold']) !!}
-        {!! Form::text('nombre', $categoria->nombre, ['class' => 'form-control round']) !!}
+        {!! Form::text('nombre', $subcategoria->nombre, ['class' => 'form-control round']) !!}
+    </div>
+    <div class="form-group col-sm-12 col-md-6">
+    {!! Form::label('categoria_id', 'Categoría:', ['class' => 'bold']) !!}
+    {!! Form::select('categoria_id', $categorias, $subcategoria->categoria_id  , ['class' => 'form-control round', 'placeholder' => 'Selecciona una categoría', 'required']) !!}
+
     </div>
     <div class="form-group col-sm-12 col-md-6">
         {!! Form::label('status', 'Estatus:', ['class' => 'bold']) !!}
         {!! Form::select('status', [
            '1' => 'Activo',
            '0' => 'Inactivo',
-            ], $categoria->status, ['class' => 'form-control round']) !!}
+            ], $subcategoria->status, ['class' => 'form-control round']) !!}
 
     </div>
 </div>
