@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ProductosExport;
+use App\Models\DetalleCompra;
 use App\Models\DetalleVenta;
 use App\Models\ImagenProducto;
 use App\Models\Producto;
@@ -203,9 +204,20 @@ class ProductoController extends Controller
             return redirect(route('almacen'));
         }
 
+        //Eliminar ventas y compras
+
+      try {
+        DetalleVenta::where('producto_id', $producto->id)->delete();
+        DetalleCompra::where('producto_id', $producto->id)->delete();
+        ImagenProducto::where('producto_id', $producto->id)->delete();
+
         $producto->delete();
         Alert::success('¡Éxito!', 'Producto eliminado exitosamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
         return redirect()->route('almacen');
+      } catch (\Throwable $th) {
+        Alert::error('¡Error!', 'No se puede eliminar este producto')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+            return redirect(route('almacen'));
+      }
     }
 
     public function agregarImagen(Request $request, $id)

@@ -183,7 +183,7 @@
 
             Swal.fire({
                 title: '¿Está seguro?',
-                text: "Una vez cerrada debe abrir ora para seguir operando.",
+                text: "Una vez cerrada debe abrir otra para seguir operando.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: 'rgba(13, 172, 85)',
