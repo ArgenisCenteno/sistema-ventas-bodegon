@@ -51,20 +51,20 @@
 
                 <h4>METODOS DE PAGO</h4>
                 <label for="" class="label"> <strong>Efectivo</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" placeholder="Efectivo" name="Efectivo">
+                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Efectivo" name="Efectivo" oninput="validarValor(this)">
                 
                 <label for="" class="label"> <strong>Punto</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" placeholder="Punto" name="Punto-de-Venta">
+                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Punto" name="Punto-de-Venta"oninput="validarValor(this)">
                 
                 <label for="" class="label"> <strong>Transferencia</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" placeholder="Transferencia" name="Transferencia">
+                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Transferencia" name="Transferencia" >
                 <label for="" class="label"> <strong>Pago móvil</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" placeholder="Pago móvil" name="Pago-Movil">
+                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Pago móvil" name="Pago-Movil" oninput="validarValor(this)">
                 <label for="" class="label"> <strong>Biopago</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" placeholder="Biopago" name="Biopago">
+                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Biopago" name="Biopago" oninput="validarValor(this)">
                 <label for="" class="label"> <strong>Divisa</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" placeholder="Divisa" name="Divisa">
-                <input type="hidden" readonly step="any" class="form-control" placeholder="Divisa" name="dollar" value="{{ $dollar }}" id="dollar-tasa">
+                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Divisa" name="Divisa" oninput="validarValor(this)">
+                <input type="hidden" readonly step="any" class="form-control" placeholder="Divisa" name="dollar" oninput="validarValor(this)" value="{{ $dollar }}" id="dollar-tasa">
                 <input type="hidden" readonly step="any" class="form-control"   name="pagado" value="0" id="pagado">
                 <input type="hidden" readonly step="any" class="form-control"   name="pagado" value="0" id="totalBolivares">
                 <div id="productos-hidden-fields"></div> <!-- Hidden fields for products -->
@@ -78,3 +78,11 @@
     </section>
 
 </form>
+
+<script>
+function validarValor(input) {
+    if (input.value === "" || parseFloat(input.value) < 0) {
+        input.value = 0;
+    }
+}
+</script>

@@ -138,17 +138,23 @@ class CategoriaController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $categoria = Categoria::where('id', $id)->first();
-       
-
-        if(!$categoria){
+        $actualizar = Categoria::where('id', $id)->first();
+        if(!$actualizar){
             Alert::error('¡Error!', 'No existe esta categoría')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
             return redirect(route('categorias.index'));
         }
 
-        $categoria->delete();
-        Alert::success('¡Éxito!', 'Categoría eliminada exitosamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
-        return redirect()->route('categorias.index');
+        try {
+            $actualizar->delete();
+        Alert::success('¡Exito!', 'Registro eliminado exitosamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+        return redirect(route('subcategorias.index'));
+        } catch (\Throwable $th) {
+            Alert::error('¡Error!', 'No se puede eliminar, hay productos con esta categoría')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+
+            return redirect(route('categorias.index'));
+
+        }
+    
 
     }
 }
