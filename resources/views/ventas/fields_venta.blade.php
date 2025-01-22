@@ -50,20 +50,23 @@
             <div class="col-md-12">
 
                 <h4>METODOS DE PAGO</h4>
-                <label for="" class="label"> <strong>Efectivo</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Efectivo" name="Efectivo" oninput="validarValor(this)">
-                
-                <label for="" class="label"> <strong>Punto</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Punto" name="Punto-de-Venta"oninput="validarValor(this)">
-                
-                <label for="" class="label"> <strong>Transferencia</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Transferencia" name="Transferencia" >
-                <label for="" class="label"> <strong>Pago móvil</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Pago móvil" name="Pago-Movil" oninput="validarValor(this)">
-                <label for="" class="label"> <strong>Biopago</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Biopago" name="Biopago" oninput="validarValor(this)">
-                <label for="" class="label"> <strong>Divisa</strong> </label>
-                <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Divisa" name="Divisa" oninput="validarValor(this)">
+                <label for="efectivo"><strong>Efectivo</strong></label>
+    <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Efectivo" name="Efectivo" id="efectivo" oninput="validarValor(this)" onblur="establecerCeroSiVacio(this)">
+
+    <label for="punto"><strong>Punto</strong></label>
+    <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Punto" name="Punto-de-Venta" id="punto" oninput="validarValor(this)" onblur="establecerCeroSiVacio(this)">
+
+    <label for="transferencia"><strong>Transferencia</strong></label>
+    <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Transferencia" name="Transferencia" id="transferencia" oninput="validarValor(this)" onblur="establecerCeroSiVacio(this)">
+
+    <label for="pago-movil"><strong>Pago móvil</strong></label>
+    <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Pago móvil" name="Pago-Movil" id="pago-movil" oninput="validarValor(this)" onblur="establecerCeroSiVacio(this)">
+
+    <label for="biopago"><strong>Biopago</strong></label>
+    <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Biopago" name="Biopago" id="biopago" oninput="validarValor(this)" onblur="establecerCeroSiVacio(this)">
+
+    <label for="divisa"><strong>Divisa</strong></label>
+    <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Divisa" name="Divisa" id="divisa" oninput="validarValor(this)" onblur="establecerCeroSiVacio(this)">
                 <input type="hidden" readonly step="any" class="form-control" placeholder="Divisa" name="dollar" oninput="validarValor(this)" value="{{ $dollar }}" id="dollar-tasa">
                 <input type="hidden" readonly step="any" class="form-control"   name="pagado" value="0" id="pagado">
                 <input type="hidden" readonly step="any" class="form-control"   name="pagado" value="0" id="totalBolivares">
@@ -79,9 +82,16 @@
 
 </form>
 
+
 <script>
 function validarValor(input) {
-    if (input.value === "" || parseFloat(input.value) < 0) {
+    if (parseFloat(input.value) < 0) {
+        input.value = 0;
+    }
+}
+
+function establecerCeroSiVacio(input) {
+    if (input.value.trim() === '') {
         input.value = 0;
     }
 }
