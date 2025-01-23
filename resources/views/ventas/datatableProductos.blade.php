@@ -159,6 +159,7 @@
             productos.push(nuevoProducto);
         }
         actualizarTabla();
+        pagado();
     }
 
     // Función para calcular el subtotal de un producto con IVA
@@ -289,7 +290,7 @@
         document.getElementById('restante').innerText = `${restante.toFixed(2)}`;
 
         // Asignar la función de actualización a los inputs
-        document.querySelectorAll('input[name="Efectivo"], input[name="Punto de Venta"], input[name="Transferencia"], input[name="Pago Movil"], input[name="Biopago"], input[name="Divisa"]').forEach(input => {
+        document.querySelectorAll('input[name="Efectivo"], input[name="Punto-de-Venta"], input[name="Transferencia"], input[name="Pago-Movil"], input[name="Biopago"], input[name="Divisa"]').forEach(input => {
             input.addEventListener('input', pagado);
         });
 
