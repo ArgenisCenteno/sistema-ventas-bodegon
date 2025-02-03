@@ -206,9 +206,9 @@ class ProductoController extends Controller
 
         //Eliminar ventas y compras
 
-      try {
-        DetalleVenta::where('producto_id', $producto->id)->delete();
-        DetalleCompra::where('producto_id', $producto->id)->delete();
+      try { 
+        DetalleVenta::where('id_producto', $producto->id)->delete();
+        DetalleCompra::where('id_producto', $producto->id)->delete();
         ImagenProducto::where('producto_id', $producto->id)->delete();
 
         $producto->delete();

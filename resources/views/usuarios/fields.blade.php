@@ -39,7 +39,7 @@
 
         <div class="col-md-4 mb-3">
             <label for="sector" class="form-label">Sector</label>
-            <input type="text" class="form-control @error('sector') is-invalid @enderror" id="sector" name="sector">
+            <input type="text" class="form-control @error('sector') is-invalid @enderror" id="sector" name="sector" required>
             @error('sector')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -47,7 +47,7 @@
 
         <div class="col-md-4 mb-3">
             <label for="calle" class="form-label">Calle</label>
-            <input type="text" class="form-control @error('calle') is-invalid @enderror" id="calle" name="calle">
+            <input type="text" class="form-control @error('calle') is-invalid @enderror" id="calle" name="calle" required>
             @error('calle')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -57,7 +57,7 @@
     <div class="row">
         <div class="col-md-4 mb-3">
             <label for="casa" class="form-label">Casa</label>
-            <input type="text" class="form-control @error('casa') is-invalid @enderror" id="casa" name="casa">
+            <input type="text" class="form-control @error('casa') is-invalid @enderror" id="casa" name="casa" required>
             @error('casa')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

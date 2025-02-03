@@ -12,7 +12,8 @@
     </form>
     @endif
 </div>
-<script>
+<script src="{{asset('js/sweetalert2.js')}}"></script>
+<script> 
     $(document).ready(function() {
         $('.btn-delete').submit(function(e) {
             e.preventDefault();

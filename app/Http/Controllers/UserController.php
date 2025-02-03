@@ -92,7 +92,7 @@ class UserController extends Controller
     
                 })
                 ->addColumn('actions', function ($row) {
-                    $viewUrl = route('usuarios.edit', $row->id);
+                    $viewUrl = route('clientes.edit', $row->id);
                     $deleteUrl = route('usuarios.destroy', $row->id);
                     $pdfUrl = route('usuarios.pdf', $row->id);
 
@@ -234,7 +234,23 @@ class UserController extends Controller
         // Retornar la vista con los datos del usuario y los roles
         return view('usuarios.edit', compact('user', 'roles', 'cliente'));
     }
+    public function editarCliente($id)
+    {
+        // Encontrar el usuario por ID
+        $user = User::with('roles')->where('id', $id)->first();
 
+        // Obtener todos los roles disponibles
+        $roles = Role::where('name', '!=', 'cliente')->get();
+
+        if (Auth::user()->hasRole('cliente')) {
+            $cliente = true;
+        } else {
+            $cliente = false;
+        }
+
+        // Retornar la vista con los datos del usuario y los roles
+        return view('usuarios.editCliente', compact('user', 'roles', 'cliente'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -245,7 +261,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:8',
             'dni' => 'required|string|max:20',
             'sector' => 'nullable|string|max:100',
             'calle' => 'nullable|string|max:100',
@@ -283,7 +299,44 @@ class UserController extends Controller
 
         return redirect()->route('usuarios.index');
     }
+    public function updateCliente(Request $request, $id)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id, 
+            'dni' => 'required|string|max:20',
+            'sector' => 'nullable|string|max:100',
+            'calle' => 'nullable|string|max:100',
+            'casa' => 'nullable|string|max:100', 
+            'status' => 'required|string|in:Activo,Inactivo',
+        ]);
 
+        // Encontrar el usuario por ID
+        $user = User::findOrFail($id);
+
+        // Actualizar los campos del usuario
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+     
+
+        $user->dni = $request->dni;
+        $user->sector = $request->sector;
+        $user->calle = $request->calle;
+        $user->casa = $request->casa;
+        $user->status = $request->status;
+
+        // Guardar los cambios
+        $user->save();
+
+     
+
+        // Redirigir a la lista de usuarios con un mensaje de éxito
+        Alert::success('¡Exito!', 'Registro actualizado correctamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+
+        return redirect()->route('usuarios.clientes');
+    }
 
     /**
      * Remove the specified resource from storage.

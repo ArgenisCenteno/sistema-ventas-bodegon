@@ -65,7 +65,7 @@
         @endforeach
     </tbody>
 </table>
-
+<script src="{{asset('js/sweetalert2.js')}}"></script>
 @section('js')
 @include('layout.script')
 <script src="{{ asset('js/adminlte.js') }}"></script>

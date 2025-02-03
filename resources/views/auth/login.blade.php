@@ -14,7 +14,7 @@
           <form method="POST" action="{{ route('login') }}" style="width: 23rem;" class="mt-5 pt-5">
             @csrf <!-- Agregar token CSRF obligatorio -->
 
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">ACCEDER AL <strong style="color: blue">SISTEMA</strong></h3>
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">EL BODEGÓN DE <strong style="color: blue">PELUCHE</strong></h3>
 
             <!-- Campo de correo electrónico -->
             <div class="form-outline mb-4">

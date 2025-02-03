@@ -146,9 +146,16 @@ class PagoController extends Controller
     public function destroy(string $id)
     {
         $pago = Pago::findOrFail($id); // Find the payment by ID
-        $pago->detele();
+        try {
+            $pago->delete();
         Alert::success('¡Exito!', 'Pago eliminado exitosamente')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
         return redirect(route('pagos.index'));
+        } catch (\Throwable $th) {
+            $pago->delete();
+        Alert::error('¡Rrror!', 'No se puede eliminar este pago')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
+        return redirect(route('pagos.index'));
+        }
+       
     }
 
     public function pagarCuenta(Request $request)

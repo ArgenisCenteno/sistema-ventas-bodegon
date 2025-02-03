@@ -67,7 +67,7 @@
 
     <label for="divisa"><strong>Divisa</strong></label>
     <input type="number" step="any" value="0" class="form-control" min="0" placeholder="Divisa" name="Divisa" id="divisa" oninput="validarValor(this)" onblur="establecerCeroSiVacio(this)">
-                <input type="hidden" readonly step="any" class="form-control" placeholder="Divisa" name="dollar" oninput="validarValor(this)" value="{{ $dollar }}" id="dollar-tasa">
+                <input type="hidden" readonly step="any" class="form-control" placeholder="Divisa" name="dollar" oninput="validarValor(this)" value="{{ $dollar }}" name="tasa" id="dollar-tasa">
                 <input type="hidden" readonly step="any" class="form-control"   name="pagado" value="0" id="pagado">
                 <input type="hidden" readonly step="any" class="form-control"   name="pagado" value="0" id="totalBolivares">
                 <div id="productos-hidden-fields"></div> <!-- Hidden fields for products -->

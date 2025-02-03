@@ -110,6 +110,8 @@ Route::resource('proveedores', App\Http\Controllers\ProveedorController::class);
 /* PAGOS */
 Route::resource('pagos', App\Http\Controllers\PagoController::class);
 Route::get('/pdfPago/{id}', [PdfController::class, 'pdfPago'])->name('pagos.pdf');
+Route::get('/editCliente/{id}', [UserController::class, 'editarCliente'])->name('clientes.edit');
+Route::put('/updateCliente/{id}', [UserController::class, 'updateCliente'])->name('clientes.update');
 
 /* PAGOS */
 Route::resource('usuarios', App\Http\Controllers\UserController::class);

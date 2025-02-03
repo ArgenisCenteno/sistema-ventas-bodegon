@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
                   
-                        @include('usuarios.editFields')
+                        @include('usuarios.fields_cliente')
                      
                     </div>
                 </div>

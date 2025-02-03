@@ -116,7 +116,12 @@ class VentaController extends Controller
     {
 
 
-        $users = User::pluck('name', 'id');
+        $users = User::with('roles')
+        ->whereHas('roles', function ($query) {
+            $query->where('name', 'Cliente');
+        })
+        ->pluck('name', 'id');
+    
 
         function isConnected()
         {
@@ -417,7 +422,7 @@ class VentaController extends Controller
             Alert::error('¡Error!', 'Venta no encontrada')->showConfirmButton('Aceptar', 'rgba(79, 59, 228, 1)');
             return redirect()->route('ventas');
         }
-
+  
         // Elimina los detalles de la venta
         $venta->detalleVentas()->delete();
 

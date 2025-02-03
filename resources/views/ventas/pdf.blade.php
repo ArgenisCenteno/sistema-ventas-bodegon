@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
 </head>
-
+@php
+    $tasa = $venta->pago->tasa_dolar ?? 58.54;
+@endphp
 <body
     style="font-family: Arial, sans-serif; margin: 0; padding: 10px; line-height: 1.6; border: none; background-color: #f9f9f9;">
     <div
@@ -76,6 +78,8 @@
                 <tr>
                     <th style="border-bottom: 2px solid #ddd; padding: 8px; text-align: left;">CLIENTE</th>
                     <th style="border-bottom: 2px solid #ddd; padding: 8px; text-align: left;">VENDEDOR.</th>
+                    <th style="border-bottom: 2px solid #ddd; padding: 8px; text-align: left;">TASA DOLAR.</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -83,13 +87,15 @@
                 <tr>
                     <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{$userArray['name']}}</td>
                     <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{$vendedorArray['name']}}</td>
+                   
 
+                    <td style="padding: 8px; border-bottom: 1px solid #ddd;"> {{number_format( $tasa, 2)}}</td>
 
                 </tr>
             </tbody>
         </table>
 
-
+       
         <!-- Tabla de productos -->
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <thead>
@@ -100,6 +106,7 @@
                     <th style="border-bottom: 2px solid #ddd; padding: 8px; text-align: left;">IVA</th>
                     <th style="border-bottom: 2px solid #ddd; padding: 8px; text-align: left;">NETO</th>
                     <th style="border-bottom: 2px solid #ddd; padding: 8px; text-align: left;">TOTAL</th>
+                    <th style="border-bottom: 2px solid #ddd; padding: 8px; text-align: left;">TOTAL BS</th>
                 </tr>
             </thead>
             <tbody>
@@ -113,6 +120,9 @@
                         <td style="padding: 8px; border-bottom: 1px solid #ddd;">
                             {{number_format($detalle->impuesto + $detalle->neto, 2)}}
                         </td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">
+                            {{number_format(($detalle->impuesto + $detalle->neto) * $tasa, 2)}}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -123,6 +133,7 @@
             <p><strong>SUBTOTAL:</strong> {{$venta->pago->monto_neto}}</p>
             <p><strong>IVA (16%):</strong> {{$venta->pago->impuestos}}</p>
             <p><strong>MONTO TOTAL:</strong> {{$venta->pago->monto_total}}</p>
+            <p><strong>MONTO TOTAL BS:</strong> {{$venta->pago->monto_total * $tasa}}</p>
         </div>
     </div>
 </body>
