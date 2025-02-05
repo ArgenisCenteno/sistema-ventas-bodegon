@@ -91,7 +91,6 @@
     })
 </script>
 
-
 <script>
     var productos = [];
     var totalDolar = 0;
@@ -119,7 +118,7 @@
                     console.log(data)
                     agregarProducto(
                         data.producto.nombre,
-                        data.producto.precio_compra,
+                        data.producto.precio_venta,
                         data.producto.aplica_iva,
                         data.producto.cantidad,
                         data.producto.sub_categoria.nombre
@@ -135,10 +134,17 @@
     function agregarProducto(nombre, precio, iva, stock, subcategoria) {
         const productoExistente = productos.find((p) => p.nombre === nombre);
         if (productoExistente) {
-            
+            if (productoExistente.cantidad < stock) {
                 productoExistente.cantidad++;
                 productoExistente.subtotal = calcularSubtotal(productoExistente);
-            
+            } else {
+                Swal.fire({
+                    title: 'Stock Excedido',
+                    text: `La cantidad solicitada excede el stock disponible.`,
+                    icon: 'info',
+                    confirmButtonColor: '#3085d6'
+                });
+            }
         } else {
             const nuevoProducto = {
                 nombre: nombre,
@@ -152,7 +158,7 @@
             productos.push(nuevoProducto);
         }
         actualizarTabla();
-        pagado()
+        pagado();
     }
 
     // Función para calcular el subtotal de un producto con IVA
@@ -172,9 +178,18 @@
 
         if (producto) {
             // Si la cantidad es mayor al stock, ajustarla al máximo disponible
-           
+            if (nuevaCantidad > producto.stock) {
+                inputElement.value = producto.stock; // Ajusta el valor del input al máximo disponible
+                producto.cantidad = producto.stock; // Establece la cantidad en el stock disponible
+                Swal.fire({
+                    title: 'Stock Excedido',
+                    text: `La cantidad solicitada excede el stock disponible. Se ajustó a ${producto.stock}.`,
+                    icon: 'info',
+                    confirmButtonColor: '#3085d6'
+                });
+            } else {
                 producto.cantidad = nuevaCantidad; // Si la cantidad es válida, la asigna
-            
+            }
 
             // Calcular el subtotal con la nueva cantidad
             producto.subtotal = calcularSubtotal(producto);
@@ -245,9 +260,9 @@
     function pagado() {
         // Obtener los valores de los métodos de pago
         var efectivo = parseFloat(document.querySelector('input[name="Efectivo"]').value) || 0;
-        var punto = parseFloat(document.querySelector('input[name="Punto de Venta"]').value) || 0;
+        var punto = parseFloat(document.querySelector('input[name="Punto-de-Venta"]').value) || 0;
         var transferencia = parseFloat(document.querySelector('input[name="Transferencia"]').value) || 0;
-        var pagoMovil = parseFloat(document.querySelector('input[name="Pago Movil"]').value) || 0;
+        var pagoMovil = parseFloat(document.querySelector('input[name="Pago-Movil"]').value) || 0;
         var biopago = parseFloat(document.querySelector('input[name="Biopago"]').value) || 0;
         var divisa = parseFloat(document.querySelector('input[name="Divisa"]').value) || 0;
         var totalBS = parseFloat(document.getElementById("totalBolivares").value);
@@ -263,7 +278,7 @@
 
         var restante = totalBS.toFixed(2) - totalBs.toFixed(2);
 
-        
+        console.log(restante, totalBS, totalBs)
 
         // Habilitar o deshabilitar el botón de "Generar Venta"
         if (totalBS.toFixed(2) == totalBs.toFixed(2) && totalBS > 0) {
@@ -274,7 +289,7 @@
         document.getElementById('restante').innerText = `${restante.toFixed(2)}`;
 
         // Asignar la función de actualización a los inputs
-        document.querySelectorAll('input[name="Efectivo"], input[name="Punto de Venta"], input[name="Transferencia"], input[name="Pago Movil"], input[name="Biopago"], input[name="Divisa"]').forEach(input => {
+        document.querySelectorAll('input[name="Efectivo"], input[name="Punto-de-Venta"], input[name="Transferencia"], input[name="Pago-Movil"], input[name="Biopago"], input[name="Divisa"]').forEach(input => {
             input.addEventListener('input', pagado);
         });
 
