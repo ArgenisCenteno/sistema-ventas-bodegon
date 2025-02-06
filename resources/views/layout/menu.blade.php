@@ -44,12 +44,12 @@
                                     <p>Productos</p>
                                 </a>
                             </li>
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                               <a href="{{route('proveedores.index')}}" class="nav-link">
                                     <i class="nav-icon fas fa-truck"></i>
                                     <p>Proveedores</p>
                                 </a>
-                            </li> --}}
+                            </li> 
                             <li class="nav-item">
                                 <a href="{{route('usuarios.clientes')}}" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
