@@ -249,7 +249,7 @@ class CompraController extends Controller
         $pago->forma_pago = json_encode($metodos);
         $pago->monto_total = $montoTotal;
         $pago->monto_neto = $totalNeto;
-        $pago->tasa_dolar = $request->tasa;
+        $pago->tasa_dolar = $request->dollar;
         $pago->creado_id = $userId;
         $pago->fecha_pago = Carbon::now()->format('Y-m-d');
         $pago->impuestos = $impuestosTotal;
