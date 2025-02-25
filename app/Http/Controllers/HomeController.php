@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AperturaCaja;
+use App\Models\Caja;
 use App\Models\Categoria;
 use App\Models\Compra;
 use App\Models\DetalleVenta;
@@ -116,6 +118,15 @@ class HomeController extends Controller
                 $meses2[] = Carbon::createFromFormat('m', $venta->month)->format('F');
                 $comprasData[] = $venta->total_sales;
             }
+            $caja = Caja::find(1);
+            $apertura = AperturaCaja::where('caja_id', $caja->id)->where('estatus', 'Operando')->first();
+            
+            if (!$apertura) {
+                 
+                return view('home', compact('comprasMonto', 'ventasMonto', 'pagosMonto', 'recibos', 'meses1', 'ventasData', 'comprasData', 'ventas', 'dolar', 'compras', 'notificaciones', 'proveedores', 'usuarios', 'productos', 'categorias', 'subcategorias', 'pagos'))
+                       ->with('cajaCerrada', true);
+            }
+            
 
             return view('home', data: compact('comprasMonto','ventasMonto','pagosMonto','recibos','meses1', 'ventasData', 'comprasData', 'ventas', 'dolar', 'compras', 'notificaciones', 'proveedores', 'usuarios', 'productos', 'categorias', 'subcategorias', 'pagos'));
         } else {

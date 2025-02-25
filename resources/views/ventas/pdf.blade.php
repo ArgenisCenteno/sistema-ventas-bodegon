@@ -132,6 +132,7 @@
         <div style="text-align: right; margin-bottom: 20px;">
             <p><strong>SUBTOTAL:</strong> {{$venta->pago->monto_neto}}</p>
             <p><strong>IVA (16%):</strong> {{$venta->pago->impuestos}}</p>
+            <p><strong>IVA EN BS (16%):</strong> {{$venta->pago->impuestos * $tasa}}</p>
             <p><strong>MONTO TOTAL:</strong> {{$venta->pago->monto_total}}</p>
             <p><strong>MONTO TOTAL BS:</strong> {{$venta->pago->monto_total * $tasa}}</p>
         </div>

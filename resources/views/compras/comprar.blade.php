@@ -20,12 +20,13 @@
                     <div class="card-body">
                   
                      <div class="row">
-                        <div class="col-6">
-                        @include('compras.datatableProductos') 
-                        </div>
+                       
                         <div class="col-6">
                          
                             @include('compras.fields_compra') 
+                        </div>
+                        <div class="col-6">
+                        @include('compras.datatableProductos') 
                         </div>
                      </div>
                     </div>

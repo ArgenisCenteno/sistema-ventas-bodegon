@@ -1,3 +1,5 @@
+<h4 class="text-center p-2 mt-3 text-white" style="background-color:rgb(0, 92, 179) !important;">INVENTARIO</h4>
+
 <div class="table-responsive">
     <table class="table table-hover" id="productos-table2">
         <thead class="bg-light">
@@ -16,7 +18,8 @@
         </tbody>
     </table>
 </div>
-<h4 class="mt-4 mb-4 p-3">CARRITO</h4>
+<h4 class="text-center p-2 mt-3 text-white" style="background-color:rgb(0, 92, 179) !important;">CARRITO</h4>
+
 <div class="table-responsive">
     <table class="table table-hover" id="productos-ventas">
         <thead class="bg-light">
@@ -40,10 +43,8 @@
 <script src="{{ asset('js/adminlte.js') }}"></script>
 <script src="{{asset('js/sweetalert2.js')}}"></script>
 <script type="text/javascript">
-
     $(document).ready(function () {
         let productosEnCarrito = [];
-
 
         $('#productos-table2').DataTable({
             processing: true,
@@ -52,6 +53,8 @@
             ajax: "{{ route('ventas.datatableProductoVenta') }}",
             dataType: 'json',
             type: "POST",
+            pageLength: 3, // Mostrar solo 3 registros por página
+            lengthMenu: [[3, 5, 10, 25, 50, -1], [3, 5, 10, 25, 50, "Todos"]], // Opciones para cambiar el número de registros por página
             columns: [
                 { data: 'nombre', name: 'nombre' },
                 { data: 'precio_venta', name: 'precio_venta' },
@@ -68,8 +71,9 @@
                     searchable: false,
                     orderable: false,
                     render: function (data, type, full, meta) {
-
-                        return `<button type="button" class="btn btn-primary" onClick="modificarTabla('${data}')"><span class="material-icons">shopping_cart</span></button>`;
+                        return `<button type="button" class="btn btn-primary" onClick="modificarTabla('${data}')">
+                                    <span class="material-icons">shopping_cart</span>
+                                </button>`;
                     }
                 }
             ],
@@ -87,9 +91,9 @@
                 }
             }
         });
-
-    })
+    });
 </script>
+
 
 
 <script>

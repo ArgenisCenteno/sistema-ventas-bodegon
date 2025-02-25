@@ -25,6 +25,8 @@
         </div> <!--end::Container-->
     </div> <!--end::App Content-->
 </main> <!--end::App Main--> <!--begin::Footer-->
+<!-- Modal Bootstrap -->
+
 
 
 
@@ -35,5 +37,5 @@
 <script src="{{ asset('js/adminlte.js') }}"></script>
 
  
- 
+
 @endsection

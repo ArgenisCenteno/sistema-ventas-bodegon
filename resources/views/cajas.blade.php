@@ -5,6 +5,7 @@
       <span class="info-box-icon text-bg-primary shadow-sm">
         <i class="bi bi-gear-fill"></i>
       </span>
+      
 
       <div class="info-box-content">
         <span class="info-box-text">Ventas</span>
@@ -158,6 +159,31 @@
   </div>
   <!-- /.col -->
 </div> 
+
+
+<div class="modal fade" id="modalCajaCerrada" tabindex="-1" aria-labelledby="modalCajaCerradaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="modalCajaCerradaLabel">⚠️ Caja Cerrada</h5>
+      </div>
+      <div class="modal-body">
+        <p>Para comenzar a trabajar, debe abrir la caja.</p>
+      </div>
+      <div class="modal-footer"> 
+        <a href="{{ route('aperturas.create') }}" class="btn btn-primary"  >Abrir Caja</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        @if(isset($cajaCerrada))
+            var cajaModal = new bootstrap.Modal(document.getElementById('modalCajaCerrada'));
+            cajaModal.show();
+        @endif
+    });
+</script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const meses = @json($meses1);  // Los meses obtenidos de PHP
@@ -228,3 +254,4 @@
     combined_chart.render();
   });
 </script>
+

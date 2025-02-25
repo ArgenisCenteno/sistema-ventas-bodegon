@@ -47,7 +47,7 @@
     <!-- Cantidad Field -->
     <div class="form-group col-sm-12 col-md-6">
         {!! Form::label('cantidad', 'Cantidad:', ['class' => 'bold']) !!}
-        {!! Form::number('cantidad', $producto->cantidad, ['class' => 'form-control round', 'step' => '1', 'required',  'id' => 'cantidad']) !!}
+        {!! Form::number('cantidad', $producto->cantidad, ['class' => 'form-control round', 'step' => 'any', 'required',  'id' => 'cantidad']) !!}
     </div>
 
     <!-- Subcategoría Field -->

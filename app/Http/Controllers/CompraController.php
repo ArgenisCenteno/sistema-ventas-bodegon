@@ -23,6 +23,7 @@ class CompraController extends Controller
 {
     public function index(Request $request)
     {
+        
         if ($request->ajax()) {
             $data = Compra::with(['user', 'proveedor', 'pago'])->get();
             return DataTables::of($data)

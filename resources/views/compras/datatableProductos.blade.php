@@ -1,3 +1,5 @@
+<h4 class="text-center p-2 mt-3 text-white" style="background-color:rgb(0, 92, 179) !important;">INVENTARIO</h4>
+
 <div class="table-responsive">
     <table class="table table-hover" id="productos-table2">
         <thead class="bg-light">

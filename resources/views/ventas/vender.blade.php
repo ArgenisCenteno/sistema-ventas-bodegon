@@ -18,12 +18,13 @@
                     <div class="card-body">
                   
                      <div class="row">
-                        <div class="col-6">
-                        @include('ventas.datatableProductos') 
-                        </div>
+                       
                         <div class="col-6">
                          
                             @include('ventas.fields_venta') 
+                        </div>
+                        <div class="col-6">
+                        @include('ventas.datatableProductos') 
                         </div>
                      </div>
                     </div>
