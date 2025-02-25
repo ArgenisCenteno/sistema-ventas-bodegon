@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             $dolar = $dato->promedio;
         } else {
             $consulta = Tasa::where('name', 'DOLLAR')->where('status', 'Activo')->first();
-            $dolar = $consulta->valor;
+            $dolar = $consulta->valor ?? '64.23';
         }
 
         $caja = Caja::find(1);
