@@ -120,7 +120,7 @@
                     console.log(data)
                     agregarProducto(
                         data.producto.nombre,
-                        data.producto.precio_venta,
+                        data.producto.precio_compra,
                         data.producto.aplica_iva,
                         data.producto.cantidad,
                         data.producto.sub_categoria.nombre
