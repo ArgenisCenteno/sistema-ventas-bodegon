@@ -131,7 +131,7 @@ class CompraController extends Controller
             $dollar = $dato->promedio;
         } else {
             $consulta = Tasa::where('name', 'DOLLAR')->where('status', 'Activo')->first();
-            $dollar = $consulta->valor;
+            $dollar = $consulta->valor ?? 64.32;
         }
         return view('compras.comprar')->with('caja', $caja)->with('dollar', $dollar)->with('users', $users);
     }
