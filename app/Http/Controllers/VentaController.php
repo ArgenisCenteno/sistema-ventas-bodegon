@@ -149,7 +149,7 @@ class VentaController extends Controller
             $dollar = $dato->promedio;
         } else {
             $consulta = Tasa::where('name', 'DOLLAR')->where('status', 'Activo')->first();
-            $dollar = $consulta->valor;
+            $dollar = $consulta->valor ?? 64.32;
 
         }
 

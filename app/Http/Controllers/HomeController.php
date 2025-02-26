@@ -162,7 +162,7 @@ class HomeController extends Controller
                 $dolar = $dato->promedio;
             } else {
                 $consulta = Tasa::where('name', 'DOLLAR')->where('status', 'Activo')->first();
-                $dolar = $consulta->valor;
+                $dolar = $consulta->valor ?? 64.20;
             }
 
             $notificaciones = auth()->user()->unreadNotifications;
