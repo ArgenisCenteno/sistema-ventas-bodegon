@@ -1,4 +1,4 @@
-<form action="{{ route('ventas.generarVenta') }}" id="venta-form" method="POST">
+<form action="{{ route('compras.generarCompra') }}" id="venta-form" method="POST">
     @csrf <!-- Agrega el token CSRF para seguridad -->
     <section>
 
